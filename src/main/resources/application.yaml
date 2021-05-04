@@ -1,0 +1,7 @@
+custom.ciphers.cesar:
+  position: 2
+  alphabet:
+    char-count: 26
+    position:
+      start: 97
+      end: 122
