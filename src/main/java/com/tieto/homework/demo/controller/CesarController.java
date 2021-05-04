@@ -1,6 +1,5 @@
 package com.tieto.homework.demo.controller;
 
-import com.tieto.homework.demo.classes.Slovo;
 import com.tieto.homework.demo.repository.CesarRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -14,13 +13,13 @@ public class CesarController {
     private CesarRepository cesarRepository;
 
 
-    @PostMapping("/sifruj")
-    public Slovo postSifruj(@RequestBody Slovo slovo) {
-        return this.cesarRepository.sifruj(slovo);
+    @PostMapping("/cesar/crypt")
+    public String postCesarCryptString(@RequestParam( name = "word", defaultValue = "zebra") String word) {
+        return this.cesarRepository.encrypt(word);
     }
 
-    @PostMapping("/desifruj")
-    public Slovo postDesifruj(@RequestBody Slovo slovo) {
-        return this.cesarRepository.desifruj(slovo);
+    @PostMapping("/cesar/decrypt")
+    public String postCesarDecryptString(@RequestParam( name = "word", defaultValue = "bgdtc") String word) {
+        return this.cesarRepository.decrypt(word);
     }
 }
