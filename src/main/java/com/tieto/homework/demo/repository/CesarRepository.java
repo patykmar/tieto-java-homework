@@ -1,42 +1,54 @@
 package com.tieto.homework.demo.repository;
 
-import com.tieto.homework.demo.classes.Slovo;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class CesarRepository {
+public class CesarRepository implements IEncryptable{
 
+    @Value("${custom.ciphers.cesar.position}")
+    private int position;
 
-    public static Slovo sifruj(Slovo slovo) {
-        String localSlovo = slovo.getSlovo().toLowerCase();
-        char[] slovoArray = localSlovo.toCharArray();
-        String sifrovaneSlovo = "";
+    @Value("${custom.ciphers.cesar.alphabet.position.start}")
+    private int alphabetStartPosition;
 
-        for (char znak : slovoArray) {
-            int poziceNovehoZnaku = (int)znak + slovo.getPosun();
-            if (poziceNovehoZnaku > 122){
-                poziceNovehoZnaku -= 26;
+    @Value("${custom.ciphers.cesar.alphabet.position.end}")
+    private int alphabetEndPosition;
+
+    @Value("${custom.ciphers.cesar.alphabet.char-count}")
+    private int alphabetCharCount;
+
+    @Override
+    public String encrypt(String word) {
+        String localWord = word.toLowerCase();
+        char[] slovoArray = localWord.toCharArray();
+        String cipheredWord = "";
+
+        for (char character : slovoArray) {
+            int positionOfNewChar = (int)character + this.position;
+            if (positionOfNewChar > this.alphabetEndPosition){
+                positionOfNewChar -= this.alphabetCharCount;
             }
-            sifrovaneSlovo += (char)poziceNovehoZnaku;
+            cipheredWord += (char)positionOfNewChar;
         }
 
-        return new Slovo(sifrovaneSlovo,slovo.getPosun());
+        return cipheredWord;
     }
 
-    public static Slovo desifruj(Slovo slovo) {
-        String localSlovo = slovo.getSlovo().toLowerCase();
-        char[] slovoArray = localSlovo.toCharArray();
-        String deSifrovaneSlovo = "";
+    @Override
+    public String decrypt(String word) {
+        String localWord = word.toLowerCase();
+        char[] slovoArray = localWord.toCharArray();
+        String decryptedWord = "";
 
         for (char znak : slovoArray) {
-            int poziceNovehoZnaku = (int)znak - slovo.getPosun();
-            if (poziceNovehoZnaku < 97){
-                poziceNovehoZnaku += 26;
+            int positionOfNewChar = (int)znak - this.position;
+            if (positionOfNewChar < this.alphabetStartPosition){
+                positionOfNewChar += this.alphabetCharCount;
             }
-            deSifrovaneSlovo += (char)poziceNovehoZnaku;
+            decryptedWord += (char)positionOfNewChar;
         }
 
-        return new Slovo(deSifrovaneSlovo, slovo.getPosun());
+        return decryptedWord;
     }
-
 }
