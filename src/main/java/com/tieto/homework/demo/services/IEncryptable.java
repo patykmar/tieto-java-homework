@@ -1,4 +1,4 @@
-package com.tieto.homework.demo.repository;
+package com.tieto.homework.demo.services;
 
 public interface IEncryptable {
     String encrypt(String word);
