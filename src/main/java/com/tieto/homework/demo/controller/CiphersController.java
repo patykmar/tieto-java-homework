@@ -1,6 +1,6 @@
 package com.tieto.homework.demo.controller;
 
-import com.tieto.homework.demo.classes.Parameters;
+import com.tieto.homework.demo.entity.Parameters;
 import com.tieto.homework.demo.services.CesarService;
 import com.tieto.homework.demo.services.MorseService;
 import org.springframework.beans.factory.annotation.Autowired;

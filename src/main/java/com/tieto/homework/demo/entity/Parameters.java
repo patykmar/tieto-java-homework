@@ -1,4 +1,4 @@
-package com.tieto.homework.demo.classes;
+package com.tieto.homework.demo.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
