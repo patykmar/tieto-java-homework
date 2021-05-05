@@ -25,7 +25,7 @@ public class MorseService implements IEncryptable {
         for (char character : word.toCharArray()) {
             encrypterWord += this.alphabetToMorse.get(character) + " ";
         }
-        return encrypterWord;
+        return encrypterWord.trim();
     }
 
     @Override
