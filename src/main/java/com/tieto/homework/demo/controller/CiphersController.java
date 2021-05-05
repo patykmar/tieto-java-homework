@@ -14,34 +14,34 @@ import java.util.List;
 public class CiphersController {
 
     @Autowired
-    private CesarService cesarRepository;
+    private CesarService cesarService;
 
     @Autowired
-    private MorseService morseRepository;
+    private MorseService morseService;
 
 
-    @PostMapping("/cesar/crypt")
+    @PostMapping("/cesar/encrypt")
     public String postCesarEncryptString(@RequestParam( name = "word", defaultValue = "zebra") String word) {
-        return this.cesarRepository.encrypt(word);
+        return this.cesarService.encrypt(word);
     }
 
     @PostMapping("/cesar/decrypt")
     public String postCesarDecryptString(@RequestParam( name = "word", defaultValue = "bgdtc") String word) {
-        return this.cesarRepository.decrypt(word);
+        return this.cesarService.decrypt(word);
     }
 
     @GetMapping("/cesar/parameters")
     public List<Parameters> getCesarParameters() {
-        return this.cesarRepository.getAllParameters();
+        return this.cesarService.getAllParameters();
     }
 
-    @PostMapping("/morse/crypt")
+    @PostMapping("/morse/encrypt")
     public String postMorseEncryptString(@RequestParam( name = "word", defaultValue = "ahoj") String word) {
-        return this.morseRepository.encrypt(word);
+        return this.morseService.encrypt(word);
     }
 
     @PostMapping("/morse/decrypt")
     public String postMorseDecryptString(@RequestParam( name = "word", defaultValue = ".- .... --- .---") String word) {
-        return this.morseRepository.decrypt(word);
+        return this.morseService.decrypt(word);
     }
 }
