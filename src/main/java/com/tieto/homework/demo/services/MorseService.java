@@ -1,17 +1,17 @@
-package com.tieto.homework.demo.repository;
+package com.tieto.homework.demo.services;
 
-import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
 import java.util.Map;
 
-@Repository
-public class MorseRepository implements IEncryptable {
+@Service
+public class MorseService implements IEncryptable {
 
     private Map<Character, String> alphabetToMorse;
     private Map<String, Character> morseToAlphabet;
 
-    public MorseRepository() {
+    public MorseService() {
         super();
         this.alphabetToMorse = new HashMap<>();
         this.morseToAlphabet = new HashMap<>();
