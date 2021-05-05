@@ -21,7 +21,7 @@ class CiphersControllerTest {
     private MockMvc mvc;
 
     @BeforeAll
-    public void prepare(){
+    public static void prepare(){
 //        this.toTest = new CiphersController();
     }
 
