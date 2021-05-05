@@ -1,9 +1,12 @@
 package com.tieto.homework.demo.controller;
 
-import com.tieto.homework.demo.repository.CesarRepository;
-import com.tieto.homework.demo.repository.MorseRepository;
+import com.tieto.homework.demo.classes.Parameters;
+import com.tieto.homework.demo.services.CesarService;
+import com.tieto.homework.demo.services.MorseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api")
@@ -11,14 +14,14 @@ import org.springframework.web.bind.annotation.*;
 public class CiphersController {
 
     @Autowired
-    private CesarRepository cesarRepository;
+    private CesarService cesarRepository;
 
     @Autowired
-    private MorseRepository morseRepository;
+    private MorseService morseRepository;
 
 
     @PostMapping("/cesar/crypt")
-    public String postCesarCryptString(@RequestParam( name = "word", defaultValue = "zebra") String word) {
+    public String postCesarEncryptString(@RequestParam( name = "word", defaultValue = "zebra") String word) {
         return this.cesarRepository.encrypt(word);
     }
 
@@ -27,8 +30,13 @@ public class CiphersController {
         return this.cesarRepository.decrypt(word);
     }
 
+    @GetMapping("/cesar/parameters")
+    public List<Parameters> getCesarParameters() {
+        return this.cesarRepository.getAllParameters();
+    }
+
     @PostMapping("/morse/crypt")
-    public String postMorseCryptString(@RequestParam( name = "word", defaultValue = "ahoj") String word) {
+    public String postMorseEncryptString(@RequestParam( name = "word", defaultValue = "ahoj") String word) {
         return this.morseRepository.encrypt(word);
     }
 
