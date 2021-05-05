@@ -1,10 +1,14 @@
-package com.tieto.homework.demo.repository;
+package com.tieto.homework.demo.services;
 
+import com.tieto.homework.demo.classes.Parameters;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 
-@Repository
-public class CesarRepository implements IEncryptable{
+import java.util.ArrayList;
+import java.util.List;
+
+@Service
+public class CesarService implements IEncryptable {
 
     @Value("${custom.ciphers.cesar.position}")
     private int position;
@@ -25,11 +29,11 @@ public class CesarRepository implements IEncryptable{
         String cipheredWord = "";
 
         for (char character : slovoArray) {
-            int positionOfNewChar = (int)character + this.position;
-            if (positionOfNewChar > this.alphabetEndPosition){
+            int positionOfNewChar = (int) character + this.position;
+            if (positionOfNewChar > this.alphabetEndPosition) {
                 positionOfNewChar -= this.alphabetCharCount;
             }
-            cipheredWord += (char)positionOfNewChar;
+            cipheredWord += (char) positionOfNewChar;
         }
 
         return cipheredWord;
@@ -42,13 +46,22 @@ public class CesarRepository implements IEncryptable{
         String decryptedWord = "";
 
         for (char znak : slovoArray) {
-            int positionOfNewChar = (int)znak - this.position;
-            if (positionOfNewChar < this.alphabetStartPosition){
+            int positionOfNewChar = (int) znak - this.position;
+            if (positionOfNewChar < this.alphabetStartPosition) {
                 positionOfNewChar += this.alphabetCharCount;
             }
-            decryptedWord += (char)positionOfNewChar;
+            decryptedWord += (char) positionOfNewChar;
         }
 
         return decryptedWord;
+    }
+
+    public List<Parameters> getAllParameters() {
+        List<Parameters> parameters = new ArrayList<>();
+        parameters.add(new Parameters("position", this.position));
+        parameters.add(new Parameters("alphabet-start-position", this.alphabetStartPosition));
+        parameters.add(new Parameters("alphabet-end-position", this.alphabetEndPosition));
+        parameters.add(new Parameters("alphabet-char-count", this.alphabetCharCount));
+        return parameters;
     }
 }
