@@ -1,6 +1,8 @@
 package com.tieto.homework.demo.services;
 
 import com.tieto.homework.demo.entity.Parameters;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -11,16 +13,16 @@ import java.util.List;
 public class CesarService implements IEncryptable {
 
     @Value("${custom.ciphers.cesar.position}")
-    private int position;
+    @Getter @Setter private int position;
 
     @Value("${custom.ciphers.cesar.alphabet.position.start}")
-    private int alphabetStartPosition;
+    @Getter @Setter private int alphabetStartPosition;
 
     @Value("${custom.ciphers.cesar.alphabet.position.end}")
-    private int alphabetEndPosition;
+    @Getter @Setter private int alphabetEndPosition;
 
     @Value("${custom.ciphers.cesar.alphabet.char-count}")
-    private int alphabetCharCount;
+    @Getter @Setter private int alphabetCharCount;
 
     @Override
     public String encrypt(String word) {
